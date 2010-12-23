@@ -77,16 +77,16 @@ class Misawa
     raise "failed to load image: <#{path}>" if pixbuf.nil?
 
     context.save do
-      x_ratio = image_width / pixbuf.width.to_f
-      y_ratio = image_height / pixbuf.height.to_f
+      x_ratio = @width / pixbuf.width.to_f
+      y_ratio = @height / pixbuf.height.to_f
       if x_ratio > y_ratio
         x_ratio = y_ratio
-        translate_x = (image_width - pixbuf.width * x_ratio) / 2.0
+        translate_x = (@width - pixbuf.width * x_ratio) / 2.0
         translate_y = 0
       else
         y_ratio = x_ratio
         translate_x = 0
-        translate_y = (image_height - pixbuf.height * y_ratio) / 2.0
+        translate_y = (@height - pixbuf.height * y_ratio) / 2.0
       end
       context.translate(translate_x, translate_y)
       context.scale(x_ratio, y_ratio)
