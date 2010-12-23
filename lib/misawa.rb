@@ -68,9 +68,13 @@ class Misawa
 
   def render_image(context)
     path = image_path
-    return if path.nil?
+    if path.nil?
+      message = "misawa_backgorund.* doesn't exist in the current directory."
+      message << " try: 'wget -O misawa_background.jpg http://a2.twimg.com/profile_images/461389564/aaa.jpg'"
+      raise message
+    end
     pixbuf = load_pixbuf(path)
-    return if pixbuf.nil?
+    raise "failed to load image: <#{path}>" if pixbuf.nil?
 
     context.save do
       x_ratio = image_width / pixbuf.width.to_f
